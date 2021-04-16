@@ -122,6 +122,39 @@
                                 <div class="col-md-6">
                                     <select id="provinsi" type="provinsi" class="form-control @error('provinsi') is-invalid @enderror" name="provinsi" required>
                                         <option value="">--Pilih Provinsi--</option>
+                                        @foreach ($prov as $id => $name)
+                                        <option value="{{ $id }}">{{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="kabupaten" class="col-md-4 col-form-label text-md-right">{{ __('Kabupaten') }}</label>
+
+                                <div class="col-md-6">
+                                    <select id="kabupaten" type="kabupaten" class="form-control @error('kabupaten') is-invalid @enderror" name="kabupaten" required>
+                                        <option value="">--Pilih Kabupaten--</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="kecamatan" class="col-md-4 col-form-label text-md-right">{{ __('Kecamatan') }}</label>
+
+                                <div class="col-md-6">
+                                    <select id="kecamatan" type="kecamatan" class="form-control @error('kecamatan') is-invalid @enderror" name="kecamatan" required>
+                                        <option value="">--Pilih Kecamatan--</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="kelurahan" class="col-md-4 col-form-label text-md-right">{{ __('Kelurahan') }}</label>
+
+                                <div class="col-md-6">
+                                    <select id="kelurahan" type="kelurahan" class="form-control @error('kelurahan') is-invalid @enderror" name="kelurahan" required>
+                                        <option value="">--Pilih Kelurahan--</option>
                                     </select>
                                 </div>
                             </div>
@@ -156,5 +189,65 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#provinsi').on('change', function() {
+            $.ajax({
+                url: "{{ route('get_kab') }}",
+                method: 'POST',
+                data: {
+                    id: $(this).val()
+                },
+                success: function(response) {
+                    $('#kabupaten').empty();
+
+                    $.each(response, function(id, name) {
+                        $('#kabupaten').append(new Option(name, id))
+                    })
+                }
+            })
+        });
+
+        $('#kabupaten').on('change', function() {
+            $.ajax({
+                url: "{{ route('get_kec') }}",
+                method: 'POST',
+                data: {
+                    id: $(this).val()
+                },
+                success: function(response) {
+                    $('#kecamatan').empty();
+
+                    $.each(response, function(id, name) {
+                        $('#kecamatan').append(new Option(name, id))
+                    })
+                }
+            })
+        });
+
+        $('#kecamatan').on('change', function() {
+            $.ajax({
+                url: "{{ route('get_kel') }}",
+                method: 'POST',
+                data: {
+                    id: $(this).val()
+                },
+                success: function(response) {
+                    $('#kelurahan').empty();
+
+                    $.each(response, function(id, name) {
+                        $('#kelurahan').append(new Option(name, id))
+                    })
+                }
+            })
+        });
+    });
+</script>
 
 @endsection

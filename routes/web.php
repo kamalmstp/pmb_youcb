@@ -5,10 +5,12 @@ use App\Gelombang;
 use App\Info;
 use App\Prodi;
 use App\Slider;
+use App\Provinsi;
+use App\Kabupaten;
 
-use App\Http\Controllers\admin\EmailController;
+use App\Http\Controllers\IndonesiaController;
 use App\Http\Controllers\admin\AgentController;
-
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -69,9 +71,14 @@ Route::get('/agent_lembaga', function () {
 });
 
 Route::get('/agent_individu', function () {
+    $prov = Provinsi::pluck('name', 'id');
     $title = 'Daftar Individu Sebagai Agent yoUCB';
-    return view('agent.individu');
+    return view('agent.individu', compact('title', 'prov'));
 });
+
+Route::post('get_kab', [IndonesiaController::class, 'get_kab'])->name('get_kab');
+Route::post('get_kec', [IndonesiaController::class, 'get_kec'])->name('get_kec');
+Route::post('get_kel', [IndonesiaController::class, 'get_kel'])->name('get_kel');
 
 Auth::routes();
 
