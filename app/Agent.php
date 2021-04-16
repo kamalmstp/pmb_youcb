@@ -1,0 +1,13 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Agent extends Model
+{
+    protected $table ='pmb_agent';
+    protected $fillable = [
+        'name','nik','telepon','email','tanggal_lahir','tempat_lahir','pekerjaan','provinsi','kabupaten','kecamatan','kelurahan', 'alamat','nama_pj','nomor_pj','kode_ucb','nomor_daftar','kode_agent','surat_keterangan'
+    ];
+}
