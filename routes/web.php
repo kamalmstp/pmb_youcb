@@ -82,6 +82,7 @@ Route::post('get_kel', [IndonesiaController::class, 'get_kel'])->name('get_kel')
 
 Route::post('lembagaSave', [AgentController::class, 'lembaga_store'])->name('lembagaSave');
 Route::post('individuSave', [AgentController::class, 'individu_store'])->name('individuSave');
+Route::post('get_agent', [AgentController::class, 'get_agent'])->name('get_agent');
 
 Auth::routes();
 

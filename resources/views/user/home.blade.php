@@ -102,19 +102,14 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label>Kode Agent</label><sup>* jika ada</sup>
-                <input type="text" class="boxSearch form-control @error('kode_agent') is-invalid @enderror" name="kode_agent" id="kode_agent">
+                <input type="text" class="form-control @error('kode_agent') is-invalid @enderror" name="kode_agent" id="kode_agent">
               </div>
             </div>
 
             <div class="col-sm-6">
               <div class="listSearch form-group">
                 <label>Nama Agent</label>
-                <!-- <input type="text" class="form-control" disabled value="Mustapa Ahmad Kamal"> -->
-                <ul class="listSearch">
-                  @foreach ($agent as $ag)
-                  <li><strong> {{ $ag->kode_agent }} </strong></li>
-                  @endforeach
-                </ul>
+                <input type="text" id="nama_agent" class="form-control" disabled value="">
               </div>
             </div>
           </div>
@@ -748,23 +743,27 @@
   });
 </script>
 <script>
-  $(document).ready(function($) {
+  $(document).ready(function() {
 
-    $('.listSearch li').each(function() {
-      $(this).hide();
-      $(this).attr('searchData', $(this).text());
-    });
-    $('.boxSearch').on('keyup', function() {
-      var dataList = $(this).val();
-      $('.listSearch li').each(function() {
-        if ($(this).filter('[searchData = ' + dataList + ']').length > 0 || dataList.length < 1) {
-          $(this).show();
-        } else {
-          $(this).hide();
-        }
-      });
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
     });
 
+    $('#kode_agent').change(function() { // KETIKA ISI DARI FIEL 'NPM' BERUBAH MAKA ......
+      var kodeAgent = $('#kode_agent').val(); // AMBIL isi dari fiel NPM masukkan variabel 'npmfromfield'
+      $.ajax({ // Memulai ajax
+          method: "POST",
+          url: "{{ route('get_agent') }}", // file PHP yang akan merespon ajax
+          data: {
+            kode_agent: kodeAgent
+          } // data POST yang akan dikirim
+        })
+        .done(function(hasilajax) { // KETIKA PROSES Ajax Request Selesai
+          $('#nama_agent').val(hasilajax); // Isikan hasil dari ajak ke field 'nama' 
+        });
+    })
   });
 </script>
 @endpush

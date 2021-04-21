@@ -198,4 +198,11 @@ class AgentController extends Controller
         Alur::find($id)->delete();
         return response()->json(['success' => $this->title . ' Berhasil Dihapus.']);
     }
+
+    public function get_agent(Request $request)
+    {
+        $agent = Agent::where('kode_agent', $request->get('kode_agent'))->pluck('name');
+
+        return response()->json($agent);
+    }
 }
