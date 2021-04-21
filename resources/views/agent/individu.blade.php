@@ -29,7 +29,7 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('register') }}">
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('individuSave') }}">
                             @csrf
 
                             <div class="form-group row">

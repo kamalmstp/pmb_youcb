@@ -27,7 +27,7 @@
                 <p><strong>*Note : </strong>Pastikan gunakan E-mail yang aktif, kode Agent anda yang terdaftar akan dikirimkan melalui E-mail,</p>
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('register') }}">
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('lembagaSave') }}">
                             @csrf
 
                             <div class="form-group row">

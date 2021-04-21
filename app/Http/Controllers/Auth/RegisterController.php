@@ -69,9 +69,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $gelombang = Gelombang::where('aktif', 'Y')->first();
-        // dd($gelombang->mst_th_akademik_id);
-        // dd($gelombang);
+        try {
+            $gelombang = Gelombang::where('aktif', 'Y')->first();
+
+            Mail::send('email.register_notify', [
+                'nama' => $data['name'],
+                'nisn' => $data['nisn'],
+                'telp' => $data['hp'],
+                'asal_sekolah' => $data['asal_sekolah'],
+                'password' => $data['password'],
+                'email' => $data['email'],
+                'gelombang' => @$gelombang->gelombang,
+            ], function ($message) use ($data) {
+                $message->subject('Selamat Bergabung di Universitas Cahaya Bangsa');
+                $message->from('noreply.youcb@gmail.com', 'PMB yoUCB');
+                $message->to($data['email']);
+            });
+        } catch (\Throwable $th) {
+            //throw $th;
+            // return response(['status' => false, 'errors' => $e->getMessage()]);
+            return route('register');
+        }
+
         $user = User::create([
             'nisn' => $data['nisn'],
             'telp' => $data['hp'],
@@ -83,28 +102,6 @@ class RegisterController extends Controller
             'pmb_gelombang_id' => @$gelombang->id,
             'biaya' => @$gelombang->biaya,
         ]);
-
-        // Mail::to($user->email)->send(new MailNotify($user->email));
-        try {
-            //code...
-            Mail::send('email.register_notify', [
-                'nama' => $data['name'],
-                'nisn' => $data['nisn'],
-                'telp' => $data['hp'],
-                'asal_sekolah' => $data['asal_sekolah'],
-                'password' => $data['password'],
-                'email' => $data['email'],
-                'gelombang' => @$gelombang->gelombang,
-            ], function ($message) use ($user) {
-                $message->subject('Selamat Bergabung di Universitas Cahaya Bangsa');
-                $message->from('noreply.youcb@gmail.com', 'PMB yoUCB');
-                $message->to($user->email);
-            });
-        } catch (\Throwable $th) {
-            //throw $th;
-            // return response(['status' => false, 'errors' => $e->getMessage()]);
-            return route('register');
-        }
 
         return $user;
     }

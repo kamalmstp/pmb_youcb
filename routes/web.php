@@ -80,6 +80,9 @@ Route::post('get_kab', [IndonesiaController::class, 'get_kab'])->name('get_kab')
 Route::post('get_kec', [IndonesiaController::class, 'get_kec'])->name('get_kec');
 Route::post('get_kel', [IndonesiaController::class, 'get_kel'])->name('get_kel');
 
+Route::post('lembagaSave', [AgentController::class, 'lembaga_store'])->name('lembagaSave');
+Route::post('individuSave', [AgentController::class, 'individu_store'])->name('individuSave');
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
