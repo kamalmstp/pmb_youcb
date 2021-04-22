@@ -57,15 +57,8 @@ class AgentController extends Controller
         if (is_null($request->id)) {
             $msg = [
                 'nama.required' => 'Nama Tidak Boleh Kosong',
-                'nik.required' => 'NIK Tidak Boleh Kosong',
-                'nik.numeric' => 'NIK Harus Angka',
-                'nik.unique' => 'NIK Sudah Terdaftar, NIK Tidak Bisa di Daftarkan 2 Kali',
                 'tempat_lahir.required' => 'Tempat Lahir Tidak Boleh Kosong',
                 'tanggal_lahir.required' => 'Tanggal Lahir Tidak Boleh Kosong',
-                'telepon.required' => 'Telepon Tidak Boleh Kosong',
-                'telepon.min' => 'Telepon Tidak Boleh Kurang dari 5 Angka',
-                'telepon.numeric' => 'Telepon Hanya Boleh Diisi Angka',
-                'telepon.max' => 'Telepon Hanya Boleh Maksimal 15 Angka',
                 'email.required' => 'Email Tidak Boleh Kosong',
                 'email.unique' => 'Email Sudah Pernah Terdaftar',
                 'alamat.required' => 'Alamat Tidak Boleh Kosong',
@@ -74,11 +67,8 @@ class AgentController extends Controller
             ];
             $validator = Validator::make($request->all(), [
                 'nama' => 'required',
-                'nik' => 'required|numeric|unique:pmb_agent,nik',
                 'tempat_lahir' => 'required',
                 'tanggal_lahir' => 'required',
-                'telepon' => 'required|min:5|max:15|numeric',
-                'email' => 'required|email|unique:pmb_agent,email',
                 'alamat' => 'required',
                 'pekerjaan' => 'required',
                 'validasi' => 'required',
@@ -86,28 +76,16 @@ class AgentController extends Controller
         } else {
             $msg = [
                 'nama.required' => 'Nama Tidak Boleh Kosong',
-                'nik.required' => 'NIK Tidak Boleh Kosong',
-                'nik.numeric' => 'NIK Harus Angka',
-                'nik.unique' => 'NIK Sudah Terdaftar, NIK Tidak Bisa di Daftarkan 2 Kali',
                 'tempat_lahir.required' => 'Tempat Lahir Tidak Boleh Kosong',
                 'tanggal_lahir.required' => 'Tanggal Lahir Tidak Boleh Kosong',
-                'telepon.required' => 'Telepon Tidak Boleh Kosong',
-                'telepon.min' => 'Telepon Tidak Boleh Kurang dari 5 Angka',
-                'telepon.numeric' => 'Telepon Hanya Boleh Diisi Angka',
-                'telepon.max' => 'Telepon Hanya Boleh Maksimal 15 Angka',
-                'email.required' => 'Email Tidak Boleh Kosong',
-                'email.unique' => 'Email Sudah Pernah Terdaftar',
                 'alamat.required' => 'Alamat Tidak Boleh Kosong',
                 'pekerjaan.required' => 'Pekerjaan Tidak Boleh Kosong',
                 'validasi.required' => 'Anda Belum Menyetujui Syarat dan Ketentuan Kebijakan Privasi',
             ];
             $validator = Validator::make($request->all(), [
                 'nama' => 'required',
-                'nik' => 'required|numeric|unique:pmb_agent,nik',
                 'tempat_lahir' => 'required',
                 'tanggal_lahir' => 'required',
-                'telepon' => 'required|min:5|max:15|numeric',
-                'email' => 'required|email|unique:pmb_agent,email',
                 'alamat' => 'required',
                 'pekerjaan' => 'required',
                 'validasi' => 'required',
@@ -153,7 +131,7 @@ class AgentController extends Controller
 
             Alert::success($this->title, 'Data berhasil disimpan.');
 
-            return redirect($this->url1);
+            return redirect('success');
         }
         // dd($validator->errors()->all());
         Alert::error('title', 'Error');
@@ -216,7 +194,7 @@ class AgentController extends Controller
 
             Alert::success($this->title, 'Data berhasil disimpan.');
 
-            return redirect('agent');
+            return redirect('success');
         }
 
         Alert::error('title', $validator->errors()->all());
@@ -232,7 +210,7 @@ class AgentController extends Controller
 
     public function get_agent(Request $request)
     {
-        $agent = Agent::where('kode_agent', $request->get('kode_agent'))->pluck('name');
+        $agent = Agent::where('kode_agent', $request->get('kode_agent'))->where('valid', 'Y')->pluck('name');
 
         return response()->json($agent);
     }

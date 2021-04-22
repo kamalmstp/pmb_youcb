@@ -76,7 +76,7 @@ Route::get('/agent_individu', function () {
     $title = 'Daftar Individu Sebagai Agent yoUCB';
     return view('agent.individu', compact('title', 'prov'));
 });
-Route::get('/agent_individu/success', function () {
+Route::get('/success', function () {
     $title = 'Sukses Daftar Individu Sebagai Agent yoUCB';
     return view('agent.success', compact('title'));
 });
