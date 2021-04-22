@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class AgentController extends Controller
     private $title = 'Agent yoUCB';
     private $url1 = 'agent_lembaga';
     private $url2 = 'agent_individu';
-    private $view = 'agent';
+    private $folder = 'agent';
 
     public function lembaga()
     {
@@ -166,60 +166,16 @@ class AgentController extends Controller
         if (is_null($request->id)) {
             $msg = [
                 'nama.required' => 'Nama Tidak Boleh Kosong',
-                'nik.required' => 'NIK Tidak Boleh Kosong',
-                'nik.numeric' => 'NIK Harus Angka',
-                'nik.unique' => 'NIK Sudah Terdaftar, NIK Tidak Bisa di Daftarkan 2 Kali',
-                'tempat_lahir.required' => 'Tempat Lahir Tidak Boleh Kosong',
-                'tanggal_lahir.required' => 'Tanggal Lahir Tidak Boleh Kosong',
-                'telepon.required' => 'Telepon Tidak Boleh Kosong',
-                'telepon.min' => 'Telepon Tidak Boleh Kurang dari 5 Angka',
-                'telepon.numeric' => 'Telepon Hanya Boleh Diisi Angka',
-                'telepon.max' => 'Telepon Hanya Boleh Maksimal 15 Angka',
-                'email.required' => 'Email Tidak Boleh Kosong',
-                'email.unique' => 'Email Sudah Pernah Terdaftar',
-                'alamat.required' => 'Alamat Tidak Boleh Kosong',
-                'pekerjaan.required' => 'Pekerjaan Tidak Boleh Kosong',
-                'validasi.required' => 'Anda Belum Menyetujui Syarat dan Ketentuan Kebijakan Privasi',
             ];
             $validator = Validator::make($request->all(), [
                 'nama' => 'required',
-                'nik' => 'required|numeric|unique:pmb_agent,nik',
-                'tempat_lahir' => 'required',
-                'tanggal_lahir' => 'required',
-                'telepon' => 'required|min:5|max:15|numeric',
-                'email' => 'required|email|unique:pmb_agent,email',
-                'alamat' => 'required',
-                'pekerjaan' => 'required',
-                'validasi' => 'required',
             ], $msg);
         } else {
             $msg = [
                 'nama.required' => 'Nama Tidak Boleh Kosong',
-                'nik.required' => 'NIK Tidak Boleh Kosong',
-                'nik.numeric' => 'NIK Harus Angka',
-                'nik.unique' => 'NIK Sudah Terdaftar, NIK Tidak Bisa di Daftarkan 2 Kali',
-                'tempat_lahir.required' => 'Tempat Lahir Tidak Boleh Kosong',
-                'tanggal_lahir.required' => 'Tanggal Lahir Tidak Boleh Kosong',
-                'telepon.required' => 'Telepon Tidak Boleh Kosong',
-                'telepon.min' => 'Telepon Tidak Boleh Kurang dari 5 Angka',
-                'telepon.numeric' => 'Telepon Hanya Boleh Diisi Angka',
-                'telepon.max' => 'Telepon Hanya Boleh Maksimal 15 Angka',
-                'email.required' => 'Email Tidak Boleh Kosong',
-                'email.unique' => 'Email Sudah Pernah Terdaftar',
-                'alamat.required' => 'Alamat Tidak Boleh Kosong',
-                'pekerjaan.required' => 'Pekerjaan Tidak Boleh Kosong',
-                'validasi.required' => 'Anda Belum Menyetujui Syarat dan Ketentuan Kebijakan Privasi',
             ];
             $validator = Validator::make($request->all(), [
                 'nama' => 'required',
-                'nik' => 'required|numeric|unique:pmb_agent,nik',
-                'tempat_lahir' => 'required',
-                'tanggal_lahir' => 'required',
-                'telepon' => 'required|min:5|max:15|numeric',
-                'email' => 'required|email|unique:pmb_agent,email',
-                'alamat' => 'required',
-                'pekerjaan' => 'required',
-                'validasi' => 'required',
             ], $msg);
         }
         // dd($validator->errors()->all());
@@ -260,7 +216,7 @@ class AgentController extends Controller
 
             Alert::success($this->title, 'Data berhasil disimpan.');
 
-            return redirect($this->url2);
+            return redirect('agent');
         }
 
         Alert::error('title', $validator->errors()->all());

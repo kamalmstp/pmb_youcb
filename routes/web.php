@@ -9,7 +9,7 @@ use App\Provinsi;
 use App\Kabupaten;
 
 use App\Http\Controllers\IndonesiaController;
-use App\Http\Controllers\admin\AgentController;
+use App\Http\Controllers\AgentController;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -81,8 +81,8 @@ Route::post('get_kab', [IndonesiaController::class, 'get_kab'])->name('get_kab')
 Route::post('get_kec', [IndonesiaController::class, 'get_kec'])->name('get_kec');
 Route::post('get_kel', [IndonesiaController::class, 'get_kel'])->name('get_kel');
 
-Route::post('lembagaSave', [AgentController::class, 'lembaga_store'])->name('lembagaSave');
-Route::post('individuSave', [AgentController::class, 'individu_store'])->name('individuSave');
+Route::post('lembaga_save', [AgentController::class, 'lembaga_store'])->name('lembaga_save');
+Route::post('individu_save', [AgentController::class, 'individu_store'])->name('individu_save');
 Route::post('get_agent', [AgentController::class, 'get_agent'])->name('get_agent');
 
 Auth::routes();

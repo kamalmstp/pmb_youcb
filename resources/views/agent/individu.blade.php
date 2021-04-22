@@ -22,7 +22,7 @@
                 </h3>
             </div>
             <div class="card-body">
-                <form method="POST" enctype="multipart/form-data" action="{{ route('individuSave') }}">
+                <form method="POST" enctype="multipart/form-data" action="{{ route('individu_save') }}">
                     @csrf
                     <div class="row gutters">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
