@@ -291,36 +291,25 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <label>Desa / Kelurahan</label>
-                <input type="text" class="form-control  @error('desa') is-invalid @enderror" placeholder="Desa / Kelurahan" name="desa" id="desa" required>
-                @error('desa')
+                <label>Provinsi</label>
+                <select class="form-control select2bs4 @error('provinsi') is-invalid @enderror" name="provinsi" style="width: 100%;" id="provinsi" required>
+                  <option value="">-Pilih-</option>
+                  @foreach ($prov as $id => $name)
+                  <option value="{{ $id }}">{{ $name }}</option>
+                  @endforeach
+                </select>
+                @error('provinsi')
                 <span class="invalid-feedback">
                   <strong>{{ $message }}</strong>
                 </span>
                 @enderror
               </div>
             </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label>Kecamatan</label>
-                <input type="text" class="form-control  @error('kecamatan') is-invalid @enderror" placeholder="Kecamatan" name="kecamatan" id="kecamatan" required>
-                @error('kecamatan')
-                <span class="invalid-feedback">
-                  <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-            </div>
-          </div>
-          <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
                 <label>Kabupaten / Kota</label>
                 <select name="kota_id" id="kota_id" class="form-control select2bs4  @error('kota_id') is-invalid @enderror" style="width: 100%;" required>
                   <option value="">-Pilih-</option>
-                  @foreach ($list_kota as $kota)
-                  <option value="{{ $kota->id }}">{{ $kota->name }}</option>
-                  @endforeach
                 </select>
                 @error('kota_id')
                 <span class="invalid-feedback">
@@ -329,11 +318,29 @@
                 @enderror
               </div>
             </div>
+          </div>
+
+          <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <label>Provinsi</label>
-                <input type="text" class="form-control  @error('provinsi') is-invalid @enderror" placeholder="Provinsi" name="provinsi" id="provinsi" required>
-                @error('provinsi')
+                <label>Kecamatan</label>
+                <select name="kecamatan" id="kecamatan" class="form-control select2bs4  @error('kecamatan') is-invalid @enderror" style="width: 100%;" required>
+                  <option value="">-Pilih-</option>
+                </select>
+                @error('kecamatan')
+                <span class="invalid-feedback">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Desa / Kelurahan</label>
+                <select name="desa" id="desa" class="form-control select2bs4  @error('desa') is-invalid @enderror" style="width: 100%;" required>
+                  <option value="">-Pilih-</option>
+                </select>
+                @error('desa')
                 <span class="invalid-feedback">
                   <strong>{{ $message }}</strong>
                 </span>
@@ -341,6 +348,7 @@
               </div>
             </div>
           </div>
+
           <div class="row">
             <div class="col-sm-12">
               <div class="form-group">
@@ -772,6 +780,66 @@
           $('#nama_agent').val(hasilajax); // Isikan hasil dari ajak ke field 'nama' 
         });
     })
+  });
+</script>
+<script type="text/javascript">
+  $(function() {
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    $('#provinsi').on('change', function() {
+      $.ajax({
+        url: "{{ route('get_kab') }}",
+        method: 'POST',
+        data: {
+          id: $(this).val()
+        },
+        success: function(response) {
+          $('#kota_id').empty();
+
+          $.each(response, function(id, name) {
+            $('#kota_id').append(new Option(name, id))
+          })
+        }
+      })
+    });
+
+    $('#kota_id').on('change', function() {
+      $.ajax({
+        url: "{{ route('get_kec') }}",
+        method: 'POST',
+        data: {
+          id: $(this).val()
+        },
+        success: function(response) {
+          $('#kecamatan').empty();
+
+          $.each(response, function(id, name) {
+            $('#kecamatan').append(new Option(name, id))
+          })
+        }
+      })
+    });
+
+    $('#kecamatan').on('change', function() {
+      $.ajax({
+        url: "{{ route('get_kel') }}",
+        method: 'POST',
+        data: {
+          id: $(this).val()
+        },
+        success: function(response) {
+          $('#desa').empty();
+
+          $.each(response, function(id, name) {
+            $('#desa').append(new Option(name, id))
+          })
+        }
+      })
+    });
   });
 </script>
 @endpush
