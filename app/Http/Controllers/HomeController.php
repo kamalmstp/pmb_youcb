@@ -14,6 +14,7 @@ use App\Lulus;
 use App\Prodi;
 use App\Validasi;
 use App\Agent;
+use App\Provinsi;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -45,6 +46,7 @@ class HomeController extends Controller
             $list_prodi = Prodi::orderBy('kode')->get();
             $list_kelas = Kelas::where('table', 'Kelas')->get();
             $list_jk = JenisKelamin::where('table', 'JenisKelamin')->get();
+            $prov = Provinsi::pluck('name', 'id');
 
             $validasi = Validasi::where('user_id', $user_id)
                 ->where('status', 'Baru')
@@ -94,7 +96,7 @@ class HomeController extends Controller
                     }
                 } else {
                     $title = 'Formulir Isian';
-                    return view('user.home', compact('title', 'gelombang', 'daftar', 'list_kota', 'list_prodi', 'agent', 'list_kelas', 'list_jk'));
+                    return view('user.home', compact('title', 'gelombang', 'daftar', 'list_kota', 'prov', 'list_prodi', 'agent', 'list_kelas', 'list_jk'));
                 }
             } else {
                 $title = 'Upload Bukti Pembayaran';

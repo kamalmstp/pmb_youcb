@@ -108,6 +108,7 @@ class AgentController extends Controller
                 'kode_ucb' => '03',
                 'nomor_daftar' => $jml,
                 'kode_agent' => $depan . $jml . '-03',
+                'valid' => 'W',
             ]);
 
             Alert::success($this->title, 'Data berhasil disimpan.');
@@ -181,6 +182,7 @@ class AgentController extends Controller
                 'kode_ucb' => '02',
                 'nomor_daftar' => $jml,
                 'kode_agent' => $depan . $jml . '-02',
+                'valid' => 'W',
             ]);
 
             Alert::success($this->title, 'Data berhasil disimpan.');

@@ -18,8 +18,10 @@
                 <thead>
                     <tr>
                         <th width="50" class="text-center">NO</th>
-                        <th class="text-center">KEPADA</th>
-                        <th class="text-center">SUBJECT</th>
+                        <th>KEPADA</th>
+                        <th>SUBJECT</th>
+                        <th>ISI PESAN</th>
+                        <th>STATUS</th>
                     </tr>
                 </thead>
             </table>
@@ -37,42 +39,57 @@
 <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script type="text/javascript">
+    $(function() {
 
-$(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
 
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ url($url) }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    class: 'text-center',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'kepada',
+                    name: 'kepada'
+                },
+                {
+                    data: 'subject',
+                    name: 'subject'
+                },
+                {
+                    data: 'isi',
+                    name: 'isi'
+                },
+                {
+                    data: 'lblaktif',
+                    name: 'lblaktif',
+                    class: 'text-center',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+            "order": [
+                [1, "asc"]
+            ]
+        });
 
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000
-});
-
-var table = $('.data-table').DataTable({
-  processing: true,
-  serverSide: true,
-  ajax: "{{ url($url) }}",
-  columns: [
-      {data: 'DT_RowIndex', name: 'DT_RowIndex',class : 'text-center', orderable: false, searchable: false},
-      {data: 'judul', name: 'judul'},
-      {data: 'lblaktif', name: 'lblaktif',class:'text-center'},
-      {data: 'action', name: 'action', class : 'text-center', orderable: false, searchable: false},
-  ],
-  "order": [[ 1, "asc" ]]
-});
-
-
-
-
-});
-
-});
-
+    });
 </script>
 @endpush

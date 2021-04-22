@@ -98,6 +98,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('admin/alur', 'admin\AlurController');
 
+    Route::resource('admin/agent_youcb', 'admin\AgentYoucbController');
+    Route::resource('admin/agent_lembaga', 'admin\AgentLembagaController');
+    Route::resource('admin/agent_individu', 'admin\AgentIndividuController');
+
     Route::resource('admin/email', 'admin\EmailController');
     // Route::post('admin/email', 'EmailController@test')->name('email.test');
 

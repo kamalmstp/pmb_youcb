@@ -12,6 +12,7 @@ use Alert;
 use Validator;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
+use App\Email;
 
 class EmailController extends Controller
 {
@@ -27,11 +28,11 @@ class EmailController extends Controller
         $folder = $this->folder;
 
         if ($request->ajax()) {
-            $data = Email::latest()->get();
+            $data = Email::All();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('lblaktif', function ($row) {
-                    if ($row->publish == 'Y') {
+                    if ($row->status == 'success') {
                         $hasil = '<i class="fa fa-check-circle text-success"></i>';
                     } else {
                         $hasil = '';
@@ -49,8 +50,8 @@ class EmailController extends Controller
                 ->make(true);
         }
 
-        // return view($folder . '.index', compact('title', 'url', 'folder'));
-        return view('email.kirim');
+        return view($folder . '.index', compact('title', 'url', 'folder'));
+        // return view('email.kirim');
     }
 
     public function test(Request $request)
@@ -84,7 +85,7 @@ class EmailController extends Controller
 
             $pesan = $request->pesan;
 
-            return view( 'email.kirim', compact('pesan'));
+            return view('email.kirim', compact('pesan'));
         }
     }
 
@@ -134,13 +135,31 @@ class EmailController extends Controller
                     $message->from('noreply.youcb@gmail.com', 'PMB yoUCB');
                     $message->to($request->kepada);
                 });
-                Alert::success($this->title, 'Data berhasil disimpan.');
-                return redirect('home');
-            } catch (Exception $e) {
-                return response(['status' => false, 'errors' => $e->getMessage()]);
-            }
 
-            return redirect($this->url);
+                Email::updateOrCreate(
+                    ['id' => $request->id],
+                    [
+                        'kepada' => $request->kepada,
+                        'subject' => $request->subject,
+                        'isi' => $request->pesan,
+                        'status' => 'success',
+                    ]
+                );
+                Alert::success($this->title, 'Data berhasil disimpan.');
+                return redirect($this->url);
+            } catch (Exception $e) {
+                // return response(['status' => false, 'errors' => $e->getMessage()]);
+                Email::updateOrCreate(
+                    ['id' => $request->id],
+                    [
+                        'kepada' => $request->kepada,
+                        'subject' => $request->subject,
+                        'isi' => $request->pesan,
+                        'status' => 'gagal',
+                    ]
+                );
+                return redirect($this->url);
+            }
         }
         // dd($validator->errors()->all());
         Alert::error('tite', 'Error');
