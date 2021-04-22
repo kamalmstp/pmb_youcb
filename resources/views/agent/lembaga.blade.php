@@ -22,6 +22,15 @@
                 </h3>
             </div>
             <div class="card-body">
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <form method="POST" enctype="multipart/form-data" action="{{ route('lembaga_save') }}">
                     @csrf
                     <div class="row gutters">
@@ -67,7 +76,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="tanggal_lahir">{{ __('Tanggal Lahir') }}</label>
-                                <input id="tanggal_lahir" type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required autocomplete="tanggal_lahir" autofocus>
+                                <input id="tanggal_lahir" type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" autocomplete="tanggal_lahir" autofocus>
 
                                 @error('tanggal_lahir')
                                 <span class="invalid-feedback" role="alert">
@@ -79,7 +88,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="telepon">{{ __('Nomor Telepon') }}</label>
-                                <input id="telepon" type="text" class="form-control @error('telepon') is-invalid @enderror" name="telepon" value="{{ old('telepon') }}" required autocomplete="telepon" autofocus>
+                                <input id="telepon" type="text" class="form-control @error('telepon') is-invalid @enderror" name="telepon" value="{{ old('telepon') }}" autocomplete="telepon" autofocus>
 
                                 @error('telepon')
                                 <span class="invalid-feedback" role="alert">
@@ -91,7 +100,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="email">{{ __('E-Mail') }}</label>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -103,7 +112,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="jenis_kelamin">{{ __('Jenis Kelamin') }}</label>
-                                <select class="form-control @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" id="jenis_kelamin" required>
+                                <select class="form-control @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" id="jenis_kelamin">
                                     <option value="">-Pilih-</option>
                                     <option value="Laki-laki">Laki-laki</option>
                                     <option value="Perempuan">Perempuan</option>
@@ -118,7 +127,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="agama">{{ __('Agama') }}</label>
-                                <select class="form-control @error('agama') is-invalid @enderror" name="agama" id="agama" required>
+                                <select class="form-control @error('agama') is-invalid @enderror" name="agama" id="agama">
                                     <option value="">-Pilih-</option>
                                     <option value="Islam">Islam</option>
                                     <option value="Protestan">Protestan</option>
@@ -137,7 +146,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="jabatan">{{ __('Jabatan') }}</label>
-                                <input id="jabatan" type="text" class="form-control @error('jabatan') is-invalid @enderror" name="jabatan" value="{{ old('jabatan') }}" required autocomplete="jabatan" autofocus>
+                                <input id="jabatan" type="text" class="form-control @error('jabatan') is-invalid @enderror" name="jabatan" value="{{ old('jabatan') }}" autocomplete="jabatan" autofocus>
 
                                 @error('jabatan')
                                 <span class="invalid-feedback" role="alert">
@@ -149,7 +158,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="status_perkawinan">{{ __('Status Perkawinan') }}</label>
-                                <select class="form-control @error('status_perkawinan') is-invalid @enderror" name="status_perkawinan" id="status_perkawinan" required>
+                                <select class="form-control @error('status_perkawinan') is-invalid @enderror" name="status_perkawinan" id="status_perkawinan">
                                     <option value="">-Pilih-</option>
                                     <option value="Belum Menikah">Belum Menikah</option>
                                     <option value="Sudah Menikah">Sudah Menikah</option>
@@ -171,7 +180,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="provinsi">{{ __('Provinsi') }}</label>
-                                <select id="provinsi" type="provinsi" class="form-control @error('provinsi') is-invalid @enderror" name="provinsi" required>
+                                <select id="provinsi" type="provinsi" class="form-control @error('provinsi') is-invalid @enderror" name="provinsi">
                                     <option value="">--Pilih Provinsi--</option>
                                     @foreach ($prov as $id => $name)
                                     <option value="{{ $id }}">{{ $name }}</option>
@@ -182,7 +191,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="kabupaten">{{ __('Kabupaten') }}</label>
-                                <select id="kabupaten" type="kabupaten" class="form-control @error('kabupaten') is-invalid @enderror" name="kabupaten" required>
+                                <select id="kabupaten" type="kabupaten" class="form-control @error('kabupaten') is-invalid @enderror" name="kabupaten">
                                     <option value="">--Pilih Kabupaten--</option>
                                 </select>
                             </div>
@@ -190,7 +199,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="kecamatan">{{ __('Kecamatan') }}</label>
-                                <select id="kecamatan" type="kecamatan" class="form-control @error('kecamatan') is-invalid @enderror" name="kecamatan" required>
+                                <select id="kecamatan" type="kecamatan" class="form-control @error('kecamatan') is-invalid @enderror" name="kecamatan">
                                     <option value="">--Pilih Kecamatan--</option>
                                 </select>
                             </div>
@@ -198,7 +207,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="kelurahan">{{ __('Kelurahan') }}</label>
-                                <select id="kelurahan" type="kelurahan" class="form-control @error('kelurahan') is-invalid @enderror" name="kelurahan" required>
+                                <select id="kelurahan" type="kelurahan" class="form-control @error('kelurahan') is-invalid @enderror" name="kelurahan">
                                     <option value="">--Pilih Kelurahan--</option>
                                 </select>
                             </div>
@@ -206,7 +215,7 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="form-group">
                                 <label for="alamat">{{ __('Alamat') }}</label>
-                                <textarea id="alamat" type="alamat" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{ old('alamat') }}" required autocomplete="alamat"></textarea>
+                                <textarea id="alamat" type="alamat" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{ old('alamat') }}" autocomplete="alamat"></textarea>
 
                                 @error('alamat')
                                 <span class="invalid-feedback" role="alert">
@@ -223,7 +232,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="nama_lembaga">{{ __('Nama Lembaga') }}</label>
-                                <input id="nama_lembaga" type="text" class="form-control @error('nama_lembaga') is-invalid @enderror" name="nama_lembaga" value="{{ old('nama_lembaga') }}" required autocomplete="nama_lembaga" autofocus>
+                                <input id="nama_lembaga" type="text" class="form-control @error('nama_lembaga') is-invalid @enderror" name="nama_lembaga" value="{{ old('nama_lembaga') }}" autocomplete="nama_lembaga" autofocus>
 
                                 @error('nama_lembaga')
                                 <span class="invalid-feedback" role="alert">
@@ -235,7 +244,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="telepon_kantor">{{ __('No. Telepon Kantor') }}</label>
-                                <input id="telepon_kantor" type="text" class="form-control @error('telepon_kantor') is-invalid @enderror" name="telepon_kantor" value="{{ old('telepon_kantor') }}" required autocomplete="telepon_kantor" autofocus>
+                                <input id="telepon_kantor" type="text" class="form-control @error('telepon_kantor') is-invalid @enderror" name="telepon_kantor" value="{{ old('telepon_kantor') }}" autocomplete="telepon_kantor" autofocus>
 
                                 @error('telepon_kantor')
                                 <span class="invalid-feedback" role="alert">
@@ -246,10 +255,10 @@
                         </div>
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="form-group">
-                                <label for="alamat">{{ __('Alamat Kantor') }}</label>
-                                <textarea id="alamat" type="alamat" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{ old('alamat') }}" required autocomplete="alamat"></textarea>
+                                <label for="alamat_kantor">{{ __('Alamat Kantor') }}</label>
+                                <textarea id="alamat_kantor" type="alamat_kantor" class="form-control @error('alamat_kantor') is-invalid @enderror" name="alamat_kantor" value="{{ old('alamat') }}" autocomplete="alamat"></textarea>
 
-                                @error('alamat')
+                                @error('alamat_kantor')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

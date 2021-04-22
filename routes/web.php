@@ -5,8 +5,6 @@ use App\Gelombang;
 use App\Info;
 use App\Prodi;
 use App\Slider;
-use App\Provinsi;
-use App\Kabupaten;
 
 use App\Http\Controllers\IndonesiaController;
 use App\Http\Controllers\AgentController;
@@ -55,39 +53,17 @@ Route::get('/alur_pendaftaran', function () {
     );
 });
 
-Route::get('/agent', function () {
-    $title = 'Agent yoUCB';
-    $gelombang = Gelombang::where('aktif', 'Y')->first();
-    $alur = Alur::where('aktif', 'Y')->first();
-    return view(
-        'agent',
-        compact('title', 'gelombang', 'alur')
-    );
-});
-
-Route::get('/agent_lembaga', function () {
-    $prov = Provinsi::pluck('name', 'id');
-    $title = 'Daftar Lembaga Sebagai Agent yoUCB';
-    return view('agent.lembaga', compact('title', 'prov'));
-});
-
-Route::get('/agent_individu', function () {
-    $prov = Provinsi::pluck('name', 'id');
-    $title = 'Daftar Individu Sebagai Agent yoUCB';
-    return view('agent.individu', compact('title', 'prov'));
-});
-Route::get('/success', function () {
-    $title = 'Sukses Daftar Individu Sebagai Agent yoUCB';
-    return view('agent.success', compact('title'));
-});
+Route::get('agent', [AgentController::class, 'agent'])->name('agent');
+Route::get('agent_individu', [AgentController::class, 'agent_individu'])->name('agent_individu');
+Route::get('agent_lembaga', [AgentController::class, 'agent_lembaga'])->name('agent_lembaga');
+Route::get('success', [AgentController::class, 'success'])->name('success');
+Route::post('lembaga_save', [AgentController::class, 'lembaga_store'])->name('lembaga_save');
+Route::post('individu_save', [AgentController::class, 'individu_store'])->name('individu_save');
+Route::post('get_agent', [AgentController::class, 'get_agent'])->name('get_agent');
 
 Route::post('get_kab', [IndonesiaController::class, 'get_kab'])->name('get_kab');
 Route::post('get_kec', [IndonesiaController::class, 'get_kec'])->name('get_kec');
 Route::post('get_kel', [IndonesiaController::class, 'get_kel'])->name('get_kel');
-
-Route::post('lembaga_save', [AgentController::class, 'lembaga_store'])->name('lembaga_save');
-Route::post('individu_save', [AgentController::class, 'individu_store'])->name('individu_save');
-Route::post('get_agent', [AgentController::class, 'get_agent'])->name('get_agent');
 
 Auth::routes();
 

@@ -2,210 +2,204 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use App\Alur;
-use App\Agent;
-
-use Auth;
-use Alert;
+use App\Provinsi;
 use Validator;
-use Yajra\Datatables\Datatables;
-use Carbon\Carbon;
+use App\Agent;
 
 class AgentController extends Controller
 {
-    private $title = 'Agent yoUCB';
-    private $url1 = 'agent_lembaga';
-    private $url2 = 'agent_individu';
-    private $folder = 'agent';
-
-    public function lembaga()
+    public function agent()
     {
+        $title = 'Agent yoUCB';
 
-        $title = 'Daftar Lembaga Sebagai ' . $this->title;
-        $url = $this->url;
-        $folder = $this->folder;
-
-        return view('agent.lembaga');
+        return view('agent', compact('title'));
     }
 
-    public function create()
+    public function agent_individu()
     {
-        $title = 'Tambah Data ' . $this->title;
-        $url = $this->url;
-        $folder = $this->folder;
-        $data = null;
-
-        return view($folder . '.form', compact('title', 'url', 'folder', 'data'));
+        $prov = Provinsi::pluck('name', 'id');
+        $title = 'Daftar Individu Sebagai Agent yoUCB';
+        return view('agent.individu', compact('title', 'prov'));
     }
 
-    public function edit($id)
+    public function agent_lembaga()
     {
-        $title = 'Edit Data ' . $this->title;
-        $url = $this->url;
-        $folder = $this->folder;
-        $data = Alur::find($id);
-
-        return view($folder . '.form', compact('title', 'url', 'folder', 'data'));
+        $prov = Provinsi::pluck('name', 'id');
+        $title = 'Daftar Lembaga Sebagai Agent yoUCB';
+        return view('agent.lembaga', compact('title', 'prov'));
     }
 
-    public function lembaga_store(Request $request)
+    public function success()
     {
-        // dd($request->all());
-        if (is_null($request->id)) {
-            $msg = [
-                'nama.required' => 'Nama Tidak Boleh Kosong',
-                'tempat_lahir.required' => 'Tempat Lahir Tidak Boleh Kosong',
-                'tanggal_lahir.required' => 'Tanggal Lahir Tidak Boleh Kosong',
-                'email.required' => 'Email Tidak Boleh Kosong',
-                'email.unique' => 'Email Sudah Pernah Terdaftar',
-                'alamat.required' => 'Alamat Tidak Boleh Kosong',
-                'pekerjaan.required' => 'Pekerjaan Tidak Boleh Kosong',
-                'validasi.required' => 'Anda Belum Menyetujui Syarat dan Ketentuan Kebijakan Privasi',
-            ];
-            $validator = Validator::make($request->all(), [
-                'nama' => 'required',
-                'tempat_lahir' => 'required',
-                'tanggal_lahir' => 'required',
-                'alamat' => 'required',
-                'pekerjaan' => 'required',
-                'validasi' => 'required',
-            ], $msg);
-        } else {
-            $msg = [
-                'nama.required' => 'Nama Tidak Boleh Kosong',
-                'tempat_lahir.required' => 'Tempat Lahir Tidak Boleh Kosong',
-                'tanggal_lahir.required' => 'Tanggal Lahir Tidak Boleh Kosong',
-                'alamat.required' => 'Alamat Tidak Boleh Kosong',
-                'pekerjaan.required' => 'Pekerjaan Tidak Boleh Kosong',
-                'validasi.required' => 'Anda Belum Menyetujui Syarat dan Ketentuan Kebijakan Privasi',
-            ];
-            $validator = Validator::make($request->all(), [
-                'nama' => 'required',
-                'tempat_lahir' => 'required',
-                'tanggal_lahir' => 'required',
-                'alamat' => 'required',
-                'pekerjaan' => 'required',
-                'validasi' => 'required',
-            ], $msg);
-        }
-
-
-        if ($validator->passes()) {
-
-            $jml = (Agent::where('kode_ucb', '03')->count()) + 1;
-            if ($jml > 9) {
-                $depan = '0';
-            } elseif ($jml > 99) {
-                $depan = '';
-            } else {
-                $depan = '00';
-            }
-
-            Agent::create([
-                'name' => $request->nama,
-                'nik' => $request->nik,
-                'tempat_lahir' => $request->tempat_lahir,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'telepon' => $request->telepon,
-                'email' => $request->email,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'agama' => $request->agama,
-                'status_perkawinan' => $request->status_perkawinan,
-                'jabatan' => $request->jabatan,
-                'provinsi' => $request->provinsi,
-                'kabupaten' => $request->kabupaten,
-                'kecamatan' => $request->kecamatan,
-                'kelurahan' => $request->kelurahan,
-                'alamat' => $request->alamat,
-                'nama_lembaga' => $request->nama_lembaga,
-                'telepon_kantor' => $request->telepon_kantor,
-                'alamat_kantor' => $request->alamat_kantor,
-                'kode_ucb' => '03',
-                'nomor_daftar' => $jml,
-                'kode_agent' => $depan . $jml . '-03',
-                'valid' => 'W',
-            ]);
-
-            Alert::success($this->title, 'Data berhasil disimpan.');
-
-            return redirect('success');
-        }
-        // dd($validator->errors()->all());
-        Alert::error('title', 'Error');
-        return redirect($this->url1);
+        $title = 'Sukses Daftar Individu Sebagai Agent yoUCB';
+        return view('agent.success', compact('title'));
     }
 
     public function individu_store(Request $request)
     {
-        // dd($request->all());
-        if (is_null($request->id)) {
-            $msg = [
-                'nama.required' => 'Nama Tidak Boleh Kosong',
-            ];
-            $validator = Validator::make($request->all(), [
-                'nama' => 'required',
-            ], $msg);
+        $rules = [
+            'nama' => 'required',
+            'nik' => 'required|numeric|unique:pmb_agent|min:16',
+            'email' => 'required|email|unique:pmb_agent',
+            'telepon' => 'required|numeric',
+            'pekerjaan' => 'required',
+            'instansi' => 'required',
+            'alamat' => 'required',
+            'validasi' => 'required',
+            'ktp' => 'required|image|max:2048',
+        ];
+        $messages = [
+            'nama.required' => 'Nama tidak boleh kosong',
+            'nik.required' => 'NIK tidak boleh kosong',
+            'nik.numeric' => 'NIK hanya boleh diisi angka',
+            'nik.unique' => 'NIK sudah terdaftar',
+            'nik.min' => 'NIK minimal 16 karakter',
+            'email.required' => 'Email tidak boleh kosong',
+            'email.email' => 'Email tidak valid',
+            'email.unique' => 'Email sudah terdaftar',
+            'telepon.required' => 'Telepon tidak boleh kosong',
+            'telepon.numeric' => 'Telepon hanya boleh diisi angka',
+            'pekerjaan.required' => 'Pekerjaan tidak boleh kosong',
+            'instansi.required' => 'Instansi tidak boleh kosong',
+            'alamat.required' => 'Alamat tidak boleh kosong',
+            'validasi.required' => 'Anda harus menyetujui syarat & ketentuan',
+            'ktp.image' => 'File harus berektensi JPG, JPEG, PNG.',
+            'ktp.required' => 'File Tidak Boleh Kosong',
+            'ktp.max' => 'File ukuran tidak boleh dari 2Mb',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
+        $jml = (Agent::where('kode_ucb', '02')->count()) + 1;
+        if ($jml > 9) {
+            $depan = '0';
+        } elseif ($jml > 99) {
+            $depan = '';
         } else {
-            $msg = [
-                'nama.required' => 'Nama Tidak Boleh Kosong',
-            ];
-            $validator = Validator::make($request->all(), [
-                'nama' => 'required',
-            ], $msg);
-        }
-        // dd($validator->errors()->all());
-
-        if ($validator->passes()) {
-
-            $jml = (Agent::where('kode_ucb', '02')->count()) + 1;
-            if ($jml > 9) {
-                $depan = '0';
-            } elseif ($jml > 99) {
-                $depan = '';
-            } else {
-                $depan = '00';
-            }
-
-            Agent::create([
-                'name' => $request->nama,
-                'nik' => $request->nik,
-                'tempat_lahir' => $request->tempat_lahir,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'telepon' => $request->telepon,
-                'email' => $request->email,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'agama' => $request->agama,
-                'status_perkawinan' => $request->status_perkawinan,
-                'pekerjaan' => $request->pekerjaan,
-                'instansi' => $request->instansi,
-                'provinsi' => $request->provinsi,
-                'kabupaten' => $request->kabupaten,
-                'kecamatan' => $request->kecamatan,
-                'kelurahan' => $request->kelurahan,
-                'alamat' => $request->alamat,
-                'kode_ucb' => '02',
-                'nomor_daftar' => $jml,
-                'kode_agent' => $depan . $jml . '-02',
-                'valid' => 'W',
-            ]);
-
-            Alert::success($this->title, 'Data berhasil disimpan.');
-
-            return redirect('success');
+            $depan = '00';
         }
 
-        Alert::error('title', $validator->errors()->all());
-        return redirect($this->url2);
+        $destinationPath = 'ktp';
+        $ext_file = $request->ktp->getClientOriginalExtension();
+        $file_name = uniqid() . '.' . $ext_file;
+        $request->ktp->move($destinationPath, $file_name);
+
+        Agent::create([
+            'name' => $request->nama,
+            'nik' => $request->nik,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'telepon' => $request->telepon,
+            'email' => $request->email,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'agama' => $request->agama,
+            'status_perkawinan' => $request->status_perkawinan,
+            'pekerjaan' => $request->pekerjaan,
+            'instansi' => $request->instansi,
+            'provinsi' => $request->provinsi,
+            'kabupaten' => $request->kabupaten,
+            'kecamatan' => $request->kecamatan,
+            'kelurahan' => $request->kelurahan,
+            'alamat' => $request->alamat,
+            'kode_ucb' => '02',
+            'nomor_daftar' => $jml,
+            'kode_agent' => $depan . $jml . '-02',
+            'valid' => 'W',
+            'file' => $file_name,
+        ]);
+
+        return redirect('success');
     }
 
-
-    public function destroy($id)
+    public function lembaga_store(Request $request)
     {
-        Alur::find($id)->delete();
-        return response()->json(['success' => $this->title . ' Berhasil Dihapus.']);
+        $rules = [
+            'nama' => 'required',
+            'nik' => 'required|numeric|unique:pmb_agent|min:16',
+            'email' => 'required|email|unique:pmb_agent',
+            'telepon' => 'required|numeric',
+            'jabatan' => 'required',
+            'alamat' => 'required',
+            'nama_lembaga' => 'required',
+            'telepon_kantor' => 'required',
+            'alamat_kantor' => 'required',
+            'validasi' => 'required',
+            'ktp' => 'required|image|max:2048',
+        ];
+        $messages = [
+            'nama.required' => 'Nama tidak boleh kosong',
+            'nik.required' => 'NIK tidak boleh kosong',
+            'nik.numeric' => 'NIK hanya boleh diisi angka',
+            'nik.unique' => 'NIK sudah terdaftar',
+            'nik.min' => 'NIK minimal 16 karakter',
+            'email.required' => 'Email tidak boleh kosong',
+            'email.email' => 'Email tidak valid',
+            'email.unique' => 'Email sudah terdaftar',
+            'telepon.required' => 'Telepon tidak boleh kosong',
+            'telepon.numeric' => 'Telepon hanya boleh diisi angka',
+            'jabatan.required' => 'Pekerjaan tidak boleh kosong',
+            'alamat.required' => 'Alamat tidak boleh kosong',
+            'nama_lembaga.required' => 'Nama Lembaga tidak boleh kosong',
+            'telepon_kantor.required' => 'Telepon Kantor tidak boleh kosong',
+            'alamat_kantor.required' => 'Alamat Kantor tidak boleh kosong',
+            'validasi.required' => 'Anda harus menyetujui syarat & ketentuan',
+            'ktp.image' => 'File harus berektensi JPG, JPEG, PNG.',
+            'ktp.required' => 'File Tidak Boleh Kosong',
+            'ktp.max' => 'File ukuran tidak boleh dari 2Mb',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
+        $jml = (Agent::where('kode_ucb', '03')->count()) + 1;
+        if ($jml > 9) {
+            $depan = '0';
+        } elseif ($jml > 99) {
+            $depan = '';
+        } else {
+            $depan = '00';
+        }
+
+        $destinationPath = 'ktp';
+        $ext_file = $request->ktp->getClientOriginalExtension();
+        $file_name = uniqid() . '.' . $ext_file;
+        $request->ktp->move($destinationPath, $file_name);
+
+        Agent::create([
+            'name' => $request->nama,
+            'nik' => $request->nik,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'telepon' => $request->telepon,
+            'email' => $request->email,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'agama' => $request->agama,
+            'status_perkawinan' => $request->status_perkawinan,
+            'jabatan' => $request->jabatan,
+            'provinsi' => $request->provinsi,
+            'kabupaten' => $request->kabupaten,
+            'kecamatan' => $request->kecamatan,
+            'kelurahan' => $request->kelurahan,
+            'alamat' => $request->alamat,
+            'nama_lembaga' => $request->nama_lembaga,
+            'telepon_kantor' => $request->telepon_kantor,
+            'alamat_kantor' => $request->alamat_kantor,
+            'kode_ucb' => '03',
+            'nomor_daftar' => $jml,
+            'kode_agent' => $depan . $jml . '-03',
+            'valid' => 'W',
+            'file' => $file_name,
+        ]);
+
+        return redirect('success');
     }
 
     public function get_agent(Request $request)

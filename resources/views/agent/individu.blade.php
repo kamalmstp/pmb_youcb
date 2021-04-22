@@ -22,6 +22,15 @@
                 </h3>
             </div>
             <div class="card-body">
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <form method="POST" enctype="multipart/form-data" action="{{ route('individu_save') }}">
                     @csrf
                     <div class="row gutters">
@@ -235,7 +244,7 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="form-group">
                                 <label>{{ __('Upload KTP') }}</label>
-                                <input type="file" class="form-control" name="ktp" id="ktp">
+                                <input type="file" class="form-control" name="ktp" id="ktp" required>
                                 <span class="text-danger">File Gambar. Ukuran File Maksimal 2Mb.</span>
                                 @error('ktp')
                                 <span class="invalid-feedback">
