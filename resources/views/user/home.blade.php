@@ -228,7 +228,15 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label>Agama</label>
-                <input type="text" class="form-control  @error('agama') is-invalid @enderror" placeholder="Agama" name="agama" id="agama" required>
+                <select class="form-control @error('agama') is-invalid @enderror" name="agama" id="agama" required>
+                  <option value="">-Pilih-</option>
+                  <option value="Islam">Islam</option>
+                  <option value="Protestan">Protestan</option>
+                  <option value="Katolik">Katolik</option>
+                  <option value="Hindu">Hindu</option>
+                  <option value="Buddha">Buddha</option>
+                  <option value="Khonghucu">Khonghucu</option>
+                </select>
                 @error('agama')
                 <span class="invalid-feedback">
                   <strong>{{ $message }}</strong>

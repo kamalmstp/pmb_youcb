@@ -66,8 +66,9 @@ Route::get('/agent', function () {
 });
 
 Route::get('/agent_lembaga', function () {
+    $prov = Provinsi::pluck('name', 'id');
     $title = 'Daftar Lembaga Sebagai Agent yoUCB';
-    return view('agent.lembaga');
+    return view('agent.lembaga', compact('title', 'prov'));
 });
 
 Route::get('/agent_individu', function () {
