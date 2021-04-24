@@ -38,7 +38,7 @@
                 </div>
 
                 <div style="width:300px;margin:15px auto">
-                    <img style="width:70%;display:block;" src="https://pmb.youcb.ac.id/img/undraw_Agreement_re_d4dv.svg?utm_source=image2&utm_medium=image2&utm_campaign=image2">
+                    <img style="width:70%;display:block;" src="https://pmb.youcb.ac.id/img/undraw_Agreement_re_d4dv.svg?utm_source=image1&utm_medium=image1&utm_campaign=image1&utm_content=image1">
                 </div>
 
                 <div style="margin:30px auto;background:#fff;padding:0px;border-radius:5px;width:600px;max-width:100%">
@@ -63,11 +63,11 @@
 
                 <div style="text-align:center">
                     <div style="color:initial;margin:5px 10px;width:210px;border-radius:5px;background:#ededed;box-sizing:border-box;display:inline-block;text-align:center;padding:10px">
-                        <i class="fas fa-phone-square"></i>
-                        <a href="#" style="text-decoration:none;display:inline-block;vertical-align:middle" target="_blank"></a>+628115132333
+                        <img src="https://pmb.youcb.ac.id/img/wa.png?utm_source=wa-image&utm_medium=wa-image&utm_campaign=wa-image&utm_content=wa-image" style="display:inline-block;vertical-align:middle;margin-right:5px" class="CToWUd">
+                        <a href="https://api.whatsapp.com/send?phone=+628115132333" style="text-decoration:none;display:inline-block;vertical-align:middle" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://api.whatsapp.com/send?phone%3D%2B628115132333&amp;source=gmail&amp;ust=1619345431793000&amp;usg=AFQjCNGb5eMISZFH9cWNlc4ZBWwD2g6QvA"></a>+628115132333
                     </div>
                     <div style="color:initial;margin:5px 10px;width:210px;border-radius:5px;background:#ededed;box-sizing:border-box;display:inline-block;text-align:center;padding:10px">
-                        <i class="fas fa-envelope-square"></i>
+                        <img src="https://pmb.youcb.ac.id/img/email.png?utm_source=email-image&utm_medium=email-image&utm_campaign=email-image&utm_content=email-image" style="display:inline-block;vertical-align:middle;margin-right:5px" class="CToWUd">
                         <a href="mailto:youcbinfo@gmail.com" style="text-decoration:none;display:inline-block;vertical-align:middle" target="_blank"></a>youcbinfo@gmail.com
                     </div>
                     <div style="clear:both"></div>
@@ -76,19 +76,19 @@
                 <table style="display:block;padding:0px;float:none;text-align:center;width:100%;max-width:100%;margin:30px auto">
                     <tbody style="margin:0px auto;float:none;text-align:center;display:inline-block">
                         <tr>
-                            <td style="width:10px;padding:0px 7.5px">
+                            <td style="width:35px;height:35px;padding:0px 7.5px">
                                 <a href="https://instagram.com/youcb.official" target="_blank">
-                                    <i class="fab fa-instagram-square fa-3x"></i>
+                                    <img style="width:100%;margin:0px auto" src="https://pmb.youcb.ac.id/img/ig.png?utm_source=insta&utm_medium=insta&utm_campaign=insta&utm_content=insta" class="CToWUd">
                                 </a>
                             </td>
-                            <td style="width:10px;padding:0px 7.5px">
+                            <td style="width:35px;height:35px;padding:0px 7.5px">
                                 <a href="https://www.youtube.com/channel/UCm4DDCay06uqgDpUgLb6kmg?view_as=subscriber" target="_blank">
-                                    <i class="fab fa-youtube-square fa-3x"></i>
+                                    <img style="width:100%;margin:0px auto" src="https://pmb.youcb.ac.id/img/yt.png?utm_source=yout&utm_medium=yout&utm_campaign=yout&utm_content=yout" class="CToWUd">
                                 </a>
                             </td>
-                            <td style="width:10px;padding:0px 7.5px">
+                            <td style="width:35px;height:35px;padding:0px 7.5px">
                                 <a href="https://youcb.ac.id/" target="_blank">
-                                    <i class="fas fa-globe fa-3x"></i>
+                                    <img style="width:100%;margin:0px auto" src="https://pmb.youcb.ac.id/img/web.png?utm_source=web&utm_medium=web&utm_campaign=web&utm_content=web" class="CToWUd">
                                 </a>
                             </td>
                         </tr>
