@@ -38,7 +38,7 @@
                 </div>
 
                 <div style="width:300px;margin:15px auto">
-                    <img style="width:70%;display:block;" src="https://pmb.youcb.ac.id/img/undraw_Agreement_re_d4dv.svg?utm_source=image1&utm_medium=image1&utm_campaign=image1&utm_content=image1">
+                    <img style="width:70%;display:block;" src="https://pmb.youcb.ac.id/img/agreement.jpg?utm_source=agree&utm_medium=agree&utm_campaign=agree&utm_content=agree">
                 </div>
 
                 <div style="margin:30px auto;background:#fff;padding:0px;border-radius:5px;width:600px;max-width:100%">
@@ -94,8 +94,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <div style="display:block;width:221px;max-width:inherit;margin:15px auto;border-bottom:1px solid #b5b5b5"></div>
-
                 <div style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:12px;line-height:1.2;color:#555555">
                     <p style="font-size:12px;line-height:1.2;margin:0"><span style="color:#808080;font-size:12px"><em><span style="font-size:9px">
                                     Email ini dikirim oleh tim Penerimaan Mahasiswa Baru Universitas Cahaya Bangsa (PMB yoUCB). Email ini adalah email otomatis, harap untuk tidak membalas email ini, jika ingin menghubungi kami, silahkan hubungi email & nomor telepon yang tertera. Informasi lebih lanjut silahkan kunjungi
