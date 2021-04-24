@@ -1,5 +1,5 @@
 @extends('layouts.app_admin')
-@section('title',$title)
+@section('title',$title ?? '')
 @section('content')
 <div class="card card-primary card-outline">
     <div class="card-header">
@@ -8,7 +8,7 @@
             @yield('title')
         </h3>
         <div class="card-tools">
-            <a href="{{ url($url.'/create') }}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Tambah</a>
+            <a href="{{ url($url ?? ''.'/create') }}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Tambah</a>
         </div>
     </div>
 
@@ -60,7 +60,7 @@
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ url($url) }}",
+            ajax: "{{ url($url ?? '') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
@@ -122,7 +122,7 @@
 
                     $.ajax({
                         type: "DELETE",
-                        url: "{{ url($url) }}" + '/' + id,
+                        url: "{{ url($url ?? '') }}" + '/' + id,
                         success: function(data) {
                             toastr.success(data.success)
                             table.draw();
@@ -158,7 +158,7 @@
                             id: id,
                             valid: 'Y'
                         },
-                        url: "{{ url($url) }}" + '/' + id,
+                        url: "{{ url($url ?? '') }}" + '/' + id,
                         success: function(data) {
                             toastr.success(data.success)
                             table.draw();
@@ -193,7 +193,7 @@
                             id: id,
                             valid: 'N'
                         },
-                        url: "{{ url($url) }}" + '/' + id,
+                        url: "{{ url($url ?? '') }}" + '/' + id,
                         success: function(data) {
                             toastr.success(data.success)
                             table.draw();

@@ -9,6 +9,9 @@ use App\Agent;
 
 use Auth;
 use Alert;
+use Excel;
+use App\Exports\AgentyoucbExport;
+// use Maatwebsite\Excel\Facades\Excel;
 use Validator;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -150,5 +153,11 @@ class AgentYoucbController extends Controller
     {
         Agent::find($id)->delete();
         return response()->json(['success' => $this->title . ' Berhasil Dihapus.']);
+    }
+
+    public function export_agent()
+    {
+        $nama_file = 'Kode Agent PMB yoUCB' . date('Y-m-d_H:i:s') . '.xlsx';
+        return Excel::download(new AgentyoucbExport, $nama_file);
     }
 }

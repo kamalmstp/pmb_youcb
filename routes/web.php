@@ -2,6 +2,7 @@
 
 use App\Alur;
 use App\Gelombang;
+use App\Http\Controllers\admin\AgentYoucbController;
 use App\Info;
 use App\Prodi;
 use App\Slider;
@@ -64,7 +65,7 @@ Route::get('success', [AgentController::class, 'success'])->name('success');
 Route::post('lembaga_save', [AgentController::class, 'lembaga_store'])->name('lembaga_save');
 Route::post('individu_save', [AgentController::class, 'individu_store'])->name('individu_save');
 Route::post('get_agent', [AgentController::class, 'get_agent'])->name('get_agent');
-Route::post('tolak_agent/{id}', [AgentController::class, 'decline'])->name('tolak_agent');
+Route::get('export_agent', [AgentYoucbController::class, 'export_agent']);
 
 Route::post('get_kab', [IndonesiaController::class, 'get_kab'])->name('get_kab');
 Route::post('get_kec', [IndonesiaController::class, 'get_kec'])->name('get_kec');
