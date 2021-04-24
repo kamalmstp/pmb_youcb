@@ -44,6 +44,8 @@ class AgentLembagaController extends Controller
                         $hasil = $hasil . '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Terima" title="Terima" class="btn btn-success btn-xs accBtn"> <i class="fas fa-check"></i> </a>';
                         $hasil = $hasil . '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Tolak" title="Tolak" class="btn btn-danger btn-xs decBtn"> <i class="fas fa-times"></i> </a>';
                         $hasil = $hasil . '</div>';
+                    } elseif ($row->valid == 'N') {
+                        $hasil = '<i class="fa fa-times-circle text-danger"></i>';
                     }
                     return $hasil;
                 })

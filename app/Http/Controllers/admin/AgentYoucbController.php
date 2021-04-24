@@ -39,8 +39,13 @@ class AgentYoucbController extends Controller
                 ->addColumn('lblaktif', function ($row) {
                     if ($row->valid == 'Y') {
                         $hasil = '<i class="fa fa-check-circle text-success"></i>';
-                    } else {
-                        $hasil = '';
+                    } elseif ($row->valid == 'W') {
+                        $hasil = '<div class="btn-group">';
+                        $hasil = $hasil . '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Terima" title="Terima" class="btn btn-success btn-xs accBtn"> <i class="fas fa-check"></i> </a>';
+                        $hasil = $hasil . '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Tolak" title="Tolak" class="btn btn-danger btn-xs decBtn"> <i class="fas fa-times"></i> </a>';
+                        $hasil = $hasil . '</div>';
+                    } elseif ($row->valid == 'N') {
+                        $hasil = '<i class="fa fa-times-circle text-danger"></i>';
                     }
                     return $hasil;
                 })
@@ -84,29 +89,17 @@ class AgentYoucbController extends Controller
         // dd($request->all());
         if (is_null($request->id)) {
             $msg = [
-                'name.required' => 'Nama Tidak Boleh Kosong',
-                'nik.required' => 'NIK Tidak Boleh Kosong',
-                'email.required' => 'Email Tidak Boleh Kosong',
-                'telepon.required' => 'Telepon Tidak Boleh Kosong',
+                'name.required' => 'Nama Tidak Boleh Kosong'
             ];
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'nik' => 'required|min:2',
-                'email' => 'required',
-                'telepon' => 'required',
+                'name' => 'required'
             ], $msg);
         } else {
             $msg = [
-                'name.required' => 'Nama Tidak Boleh Kosong',
-                'nik.required' => 'NIK Tidak Boleh Kosong',
-                'email.required' => 'Email Tidak Boleh Kosong',
-                'telepon.required' => 'Telepon Tidak Boleh Kosong',
+                'name.required' => 'Nama Tidak Boleh Kosong'
             ];
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'nik' => 'required|min:2',
-                'email' => 'required',
-                'telepon' => 'required',
+                'name' => 'required'
             ], $msg);
         }
 

@@ -32,7 +32,7 @@
             <div class="form-group row">
                 <label for="nik" class="col-sm-2 col-form-label">NIK</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control @error('nik') is-invalid @enderror" name="nik" id="nik" placeholder="Nama Lengkap" required value="{{ $data ? $data->nik : '' }}">
+                    <input type="text" class="form-control @error('nik') is-invalid @enderror" name="nik" id="nik" placeholder="Nama Lengkap" value="{{ $data ? $data->nik : '' }}">
                     @error('nik')
                     <span class="invalid-feedback">
                         <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
             <div class="form-group row">
                 <label for="email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-8">
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Email" required value="{{ $data ? $data->email : '' }}">
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Email" value="{{ $data ? $data->email : '' }}">
                     @error('email')
                     <span class="invalid-feedback">
                         <strong>{{ $message }}</strong>
