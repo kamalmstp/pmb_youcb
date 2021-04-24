@@ -33,12 +33,12 @@
             <div style="display:block;width:600px;max-width:100%;border-radius:5px;box-sizing:border-box;margin:30px auto;border:1px solid #ddd;padding:30px">
                 <div style="margin:0px auto;padding:0px;border-top-left-radius:5px;border-top-right-radius:5px;border:0px;max-width:600px;display:flex;margin-bottom:0px;background:#fff">
                     <div style="display:block;margin:15px 0px;float:none;width:300px">
-                        <img style="width:70%;max-width:75%;padding:0px" src="https://pmb.youcb.ac.id/img/Logo yoUCB Hitam.png">
+                        <img style="width:70%;max-width:75%;padding:0px" src="https://pmb.youcb.ac.id/img/Logo%20yoUCB%20Hitam.png?utm_source=logo&utm_medium=logo&utm_campaign=logo&utm_content=logo">
                     </div>
                 </div>
 
                 <div style="width:300px;margin:15px auto">
-                    <img style="width:70%;display:block;" src="https://pmb.youcb.ac.id/img/undraw_Agreement_re_d4dv.svg">
+                    <img style="width:70%;display:block;" src="https://pmb.youcb.ac.id/img/undraw_Agreement_re_d4dv.svg?utm_source=image2&utm_medium=image2&utm_campaign=image2">
                 </div>
 
                 <div style="margin:30px auto;background:#fff;padding:0px;border-radius:5px;width:600px;max-width:100%">
