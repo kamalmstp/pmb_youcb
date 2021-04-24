@@ -141,9 +141,9 @@ class AgentYoucbController extends Controller
     {
         // dd($request->all());
         $data = Agent::find($request->id);
-        $data->password = Hash::make($data->telp);
+        $data->valid = $request->valid;
         $data->save();
-        return response()->json(['success' => $this->title . ' Password Berhasil DiReset.']);
+        return response()->json(['success' => $this->title . ' Berhasil.']);
     }
 
     public function destroy($id)
