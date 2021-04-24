@@ -105,8 +105,6 @@
             ]
         });
 
-
-
         $('body').on('click', '.deleteBtn', function() {
             var id = $(this).data("id");
             Swal.fire({
@@ -137,17 +135,17 @@
 
         });
 
-        $('body').on('click', '.resetBtn', function() {
+        $('body').on('click', '.accBtn', function() {
             var id = $(this).data("id");
 
             Swal.fire({
                 title: "Data @yield('title') ID : " + id,
-                text: "Anda yakin akan mereset password data ini ?",
+                text: "Anda yakin akan menerima data ini ?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Reset Password!'
+                confirmButtonText: 'Ya Terima Agent!'
             }).then((result) => {
                 if (result.value) {
 
@@ -155,7 +153,43 @@
                         type: "PUT",
                         data: {
                             _token: CSRF_TOKEN,
-                            id: id
+                            id: id,
+                            valid: 'Y'
+                        },
+                        url: "{{ url($url) }}" + '/' + id,
+                        success: function(data) {
+                            toastr.success(data.success)
+                            table.draw();
+                        },
+                        error: function(data) {
+                            toastr.error('Silahkan hubungi Administrator');
+                        }
+                    });
+                }
+            })
+
+
+        });
+        $('body').on('click', '.decBtn', function() {
+            var id = $(this).data("id");
+
+            Swal.fire({
+                title: "Data @yield('title') ID : " + id,
+                text: "Anda yakin akan menolak data ini ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Tolak Agent!'
+            }).then((result) => {
+                if (result.value) {
+
+                    $.ajax({
+                        type: "PUT",
+                        data: {
+                            _token: CSRF_TOKEN,
+                            id: id,
+                            valid: 'N'
                         },
                         url: "{{ url($url) }}" + '/' + id,
                         success: function(data) {

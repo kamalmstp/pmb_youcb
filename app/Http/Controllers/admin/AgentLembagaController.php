@@ -39,8 +39,11 @@ class AgentLembagaController extends Controller
                 ->addColumn('lblaktif', function ($row) {
                     if ($row->valid == 'Y') {
                         $hasil = '<i class="fa fa-check-circle text-success"></i>';
-                    } else {
-                        $hasil = '';
+                    } elseif ($row->valid == 'W') {
+                        $hasil = '<div class="btn-group">';
+                        $hasil = $hasil . '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Terima" title="Terima" class="btn btn-success btn-xs accBtn"> <i class="fas fa-check"></i> </a>';
+                        $hasil = $hasil . '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Tolak" title="Tolak" class="btn btn-danger btn-xs decBtn"> <i class="fas fa-times"></i> </a>';
+                        $hasil = $hasil . '</div>';
                     }
                     return $hasil;
                 })
@@ -148,9 +151,18 @@ class AgentLembagaController extends Controller
     {
         // dd($request->all());
         $data = Agent::find($request->id);
-        $data->password = Hash::make($data->telp);
+        $data->valid = $request->valid;
         $data->save();
-        return response()->json(['success' => $this->title . ' Password Berhasil DiReset.']);
+        return response()->json(['success' => $this->title . ' Berhasil.']);
+    }
+
+    public function decline(Request $request)
+    {
+        // dd($request->all());
+        $data = Agent::find($request->id);
+        $data->valid = 'N';
+        $data->save();
+        return response()->json(['success' => $this->title . ' Berhasil Ditolak.']);
     }
 
     public function destroy($id)
