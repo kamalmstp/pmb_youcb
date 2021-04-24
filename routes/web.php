@@ -53,6 +53,10 @@ Route::get('/alur_pendaftaran', function () {
     );
 });
 
+Route::get('/kode_agent', function () {
+    return view('email.kode_agent');
+});
+
 Route::get('agent', [AgentController::class, 'agent'])->name('agent');
 Route::get('agent_individu', [AgentController::class, 'agent_individu'])->name('agent_individu');
 Route::get('agent_lembaga', [AgentController::class, 'agent_lembaga'])->name('agent_lembaga');
