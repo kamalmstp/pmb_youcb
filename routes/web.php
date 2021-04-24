@@ -55,6 +55,9 @@ Route::get('/alur_pendaftaran', function () {
 });
 
 Route::get('/kode_agent', function () {
+    return view('email.template');
+});
+Route::get('/email_agent', function () {
     return view('email.kode_agent');
 });
 
