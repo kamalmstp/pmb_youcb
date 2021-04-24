@@ -54,9 +54,9 @@
 				<tr>
 					<td>
 						<div style="padding:20px 30px 40px">
-							<div style="font-family:'Open Sans',Verdana,Arial;font-size:17px;line-height:24px;margin:0;padding:0 0 20px">
+							<!-- <div style="font-family:'Open Sans',Verdana,Arial;font-size:17px;line-height:24px;margin:0;padding:0 0 20px">
 								Hello,
-							</div>
+							</div> -->
 							<div align="justify" style="font-family:'Open Sans',Verdana,Arial;font-size:17px;line-height:24px;margin:0;padding:0">
 								{{ $pesan }}
 							</div>
