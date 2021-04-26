@@ -15,7 +15,7 @@ use App\Exports\AgentyoucbExport;
 use Validator;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AgentYoucbController extends Controller
 {
@@ -142,10 +142,24 @@ class AgentYoucbController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->all());
-        $data = Agent::find($request->id);
-        $data->valid = $request->valid;
-        $data->save();
+        if ($request->valid == 'N') {
+            $data = Agent::find($request->id);
+            $data->valid = $request->valid;
+            $data->save();
+        } else {
+            $agent = Agent::where('id', $request->id)->first();
+            $kepada = $agent->email;
+            Mail::send('email.kode_agent', ['kode_agent' => $agent->kode_agent], function ($message) use ($kepada) {
+                $message->subject('Kode Agent Anda');
+                $message->from('noreply.youcb@gmail.com', 'PMB yoUCB');
+                $message->to($kepada);
+            });
+
+            $data = Agent::find($request->id);
+            $data->valid = $request->valid;
+            $data->save();
+        }
+
         return response()->json(['success' => $this->title . ' Berhasil.']);
     }
 
