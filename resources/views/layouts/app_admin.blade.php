@@ -60,7 +60,7 @@
     <div class="float-right d-none d-sm-inline">
       {{  config('app.name') }}
     </div>
-    <strong>Copyright &copy; {{date('Y')}} <a href="{{url('http://youcb.ac.id')}}" target="_blank">Universitas Cahaya Bangsa</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; {{date('Y')}} <a href="{{url('http://youcb.ac.id')}}" target="_blank">yoUCB</a>.</strong> All rights reserved.
   </footer>
 </div>
 
