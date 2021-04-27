@@ -174,7 +174,7 @@ class AgentController extends Controller
         $request->ktp->move($destinationPath, $file_name);
 
         Agent::create([
-            'name' => $request->nama,
+            'name' => $request->nama_lembaga,
             'nik' => $request->nik,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
@@ -189,7 +189,7 @@ class AgentController extends Controller
             'kecamatan' => $request->kecamatan,
             'kelurahan' => $request->kelurahan,
             'alamat' => $request->alamat,
-            'nama_lembaga' => $request->nama_lembaga,
+            'nama_pj' => $request->nama,
             'telepon_kantor' => $request->telepon_kantor,
             'alamat_kantor' => $request->alamat_kantor,
             'kode_ucb' => '03',

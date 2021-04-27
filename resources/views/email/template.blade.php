@@ -102,9 +102,9 @@
                         <td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 20px;
 			padding-bottom: 20px;">
-                            <a target="_blank" style="text-decoration: none;" href="https://github.com/konsav/email-templates/"><img border="0" vspace="0" hspace="0" src="https://raw.githubusercontent.com/konsav/email-templates/master/images/logo-white.png" width="100" height="30" alt="Logo" title="Logo" style="
+                            <img border="0" vspace="0" hspace="0" src="https://raw.githubusercontent.com/konsav/email-templates/master/images/logo-white.png" width="100" height="30" alt="Logo" title="Logo" style="
 				color: #FFFFFF;
-				font-size: 10px; margin: 0; padding: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: block;" /></a>
+				font-size: 10px; margin: 0; padding: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: block;" />
 
                         </td>
                     </tr>
@@ -176,7 +176,7 @@
                     </tr>
                     <tr>
                         <td align="left" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 11px; font-weight: 400; line-height: 150%; padding-top: 10px; padding-bottom: 20px; color: #828999; font-family: sans-serif;" class="footer">
-                            Email ini dikirim oleh tim Penerimaan Mahasiswa Baru Universitas Cahaya Bangsa (PMB yoUCB). Email ini adalah email otomatis, harap untuk tidak membalas email ini, jika ingin menghubungi kami, silahkan hubungi email & nomor telepon yang tertera. Informasi lebih lanjut silahkan kunjungi <a href="https://youcb.ac.id" target="_blank" style="text-decoration: underline; color: #828999; font-family: sans-serif; font-size: 11px; font-weight: 400; line-height: 150%;">https://youcb.ac.id</a>
+
                         </td>
                     </tr>
                 </table>
