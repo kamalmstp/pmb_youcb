@@ -204,7 +204,12 @@ class AgentController extends Controller
 
     public function get_agent(Request $request)
     {
-        $agent = Agent::where('kode_agent', $request->get('kode_agent'))->where('valid', 'Y')->pluck('name');
+        $cek = Agent::where('kode_agent', $request->get('kode_agent'))->where('valid', 'Y')->count();
+        if ($cek == 0) {
+            $agent = 'Kode Agent Tidak Tersedia, Harap Periksa';
+        } else {
+            $agent = Agent::where('kode_agent', $request->get('kode_agent'))->where('valid', 'Y')->pluck('name');
+        }
 
         return response()->json($agent);
     }

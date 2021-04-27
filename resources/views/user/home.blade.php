@@ -767,17 +767,17 @@
       }
     });
 
-    $('#kode_agent').change(function() { // KETIKA ISI DARI FIEL 'NPM' BERUBAH MAKA ......
-      var kodeAgent = $('#kode_agent').val(); // AMBIL isi dari fiel NPM masukkan variabel 'npmfromfield'
-      $.ajax({ // Memulai ajax
+    $('#kode_agent').change(function() {
+      var kodeAgent = $('#kode_agent').val();
+      $.ajax({
           method: "POST",
-          url: "{{ route('get_agent') }}", // file PHP yang akan merespon ajax
+          url: "{{ route('get_agent') }}",
           data: {
             kode_agent: kodeAgent
-          } // data POST yang akan dikirim
+          }
         })
-        .done(function(hasilajax) { // KETIKA PROSES Ajax Request Selesai
-          $('#nama_agent').val(hasilajax); // Isikan hasil dari ajak ke field 'nama' 
+        .done(function(hasilajax) {
+          $('#nama_agent').val(hasilajax);
         });
     })
   });
