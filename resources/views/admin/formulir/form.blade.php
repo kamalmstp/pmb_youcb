@@ -145,11 +145,11 @@
             </div>
             <div class="col">
                 <strong>Desa / Kelurahan</strong>
-                <p class="text-muted">{{ $formulir->desa}}</p>
+                <p class="text-muted">{{ $formulir->desa }}</p>
             </div>
             <div class="col">
                 <strong>Kecamatan</strong>
-                <p class="text-muted">{{ $formulir->kecamatan}}</p>
+                <p class="text-muted">{{ $formulir->kecamatan }}</p>
             </div>
             <div class="col">
                 <strong>Kabupaten / Kota</strong>

@@ -37,6 +37,7 @@ class ValidasiController extends Controller
         if ($request->ajax()) {
 
             $th_akademik_id = Gelombang::where('aktif','Y')->first();
+            // $th_akademik_id = Gelombang::where('id',$id)->first();
             
 
             $data = Daftar::
